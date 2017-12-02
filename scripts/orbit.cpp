@@ -35,24 +35,24 @@ int main() {
     earthVy = 6.2783201069518713;
 
     earthAx = -1 * G * earthRx / std::pow(earthR, 3);
-    earthAy = -1 * G * earthRx / std::pow(earthR, 3);
+    earthAy = -1 * G * earthRy / std::pow(earthR, 3);
 
     // Earth motion
     for(int i=0; i < steps; i++) {
         outputFile << earthRx << ", "
                    << earthRy << ", "
+                   << earthVx << ", "
                    << earthVy << ", "
-                   << earthVy << ", "
-                   << earthAy << ", "
+                   << earthAx << ", "
                    << earthAy << std::endl;
 
-        earthRx = earthRx + earthVx * time_step + 0.5 * earthAx * pow(time_step, 2);
-        earthRy = earthRy + earthVy * time_step + 0.5 * earthAy * pow(time_step, 2);
+        earthRx = earthRx + (earthVx * time_step) + (0.5 * earthAx * pow(time_step, 2));
+        earthRy = earthRy + (earthVy * time_step) + (0.5 * earthAy * pow(time_step, 2));
 
         earthR = std::sqrt(std::pow(earthRx, 2) + std::pow(earthRy, 2));
 
-        earthVx = earthVx + earthAx * time_step;
-        earthVy = earthVy + earthAy * time_step;
+        earthVx = earthVx + (earthAx * time_step);
+        earthVy = earthVy + (earthAy * time_step);
 
         earthAx = -1 * G * earthRx / std::pow(earthR, 3);
         earthAy = -1 * G * earthRy / std::pow(earthR, 3);
